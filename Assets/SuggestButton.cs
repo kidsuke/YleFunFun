@@ -4,11 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class SuggestButton : MonoBehaviour {
-    public Text title;
+	public Text title;
 
 	// Use this for initialization
 	void Start () {
-		
+    
 	}
 
     public void Bind(Item item)
