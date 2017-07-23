@@ -310,8 +310,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 395, y: 0}
-  m_SizeDelta: {x: 20, y: 349.86}
+  m_AnchoredPosition: {x: 395, y: -196}
+  m_SizeDelta: {x: 20, y: 712.066}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &870527501
 MonoBehaviour:
@@ -392,6 +392,51 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 870527499}
+--- !u!1 &1012083856
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1012083858}
+  - component: {fileID: 1012083857}
+  m_Layer: 5
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1012083857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1012083856}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01796030765ad344bbabcc7fe83d3a99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!224 &1012083858
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1012083856}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1062312273
 GameObject:
   m_ObjectHideFlags: 0
@@ -484,11 +529,11 @@ RectTransform:
   m_Father: {fileID: 1560478770}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 1}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1070340275
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -553,6 +598,7 @@ RectTransform:
   m_Children:
   - {fileID: 1395827927}
   - {fileID: 1560478770}
+  - {fileID: 1689873300}
   m_Father: {fileID: 239050664}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -804,9 +850,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1560478770}
-  - component: {fileID: 1560478772}
   - component: {fileID: 1560478771}
-  - component: {fileID: 1560478773}
+  - component: {fileID: 1560478772}
   m_Layer: 5
   m_Name: Loop Vertical Scroll Rect
   m_TagString: Untagged
@@ -853,29 +898,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1560478769}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce71017a2903f7c4c9a699e438d0b897, type: 3}
+  m_Script: {fileID: 11500000, guid: dd81c8303f347f74db1931fd7cebffd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   prefabSource:
     prefabName: Button
     poolSize: 10
-  totalCount: -1
-  items:
-  - title: 1
-  - title: 2
-  - title: 3
-  - title: 4
-  - title: 5
-  - title: 6
-  - title: 7
-  - title: 8
-  - title: 9
-  - title: 10
-  - title: 11
-  - title: 12
-  - title: 13
-  - title: 14
-  - title: 15
+  totalCount: 0
   threshold: 100
   reverseDirection: 0
   rubberScale: 1
@@ -899,17 +928,8 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.LoopScrollRect+ScrollRectEvent, Assembly-CSharp, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!114 &1560478773
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1560478769}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c41ca759a5d70b448b991ca2699766ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Items: []
+  m_FirstInvocation: 0
 --- !u!1 &1630468126
 GameObject:
   m_ObjectHideFlags: 0
@@ -1073,6 +1093,90 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1689873299
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1689873300}
+  - component: {fileID: 1689873302}
+  - component: {fileID: 1689873301}
+  m_Layer: 5
+  m_Name: Loop Vertical Scroll Rect (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &1689873300
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1689873299}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1284840528}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: -14.897}
+  m_SizeDelta: {x: 0, y: -29.794}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1689873301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1689873299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -146154839, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1689873302
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1689873299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce71017a2903f7c4c9a699e438d0b897, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabSource:
+    prefabName: 
+    poolSize: 5
+  totalCount: 0
+  threshold: 100
+  reverseDirection: 0
+  rubberScale: 1
+  m_Content: {fileID: 0}
+  m_Horizontal: 0
+  m_Vertical: 1
+  m_MovementType: 1
+  m_Elasticity: 0.1
+  m_Inertia: 1
+  m_DecelerationRate: 0.135
+  m_ScrollSensitivity: 1
+  m_Viewport: {fileID: 0}
+  m_HorizontalScrollbar: {fileID: 0}
+  m_VerticalScrollbar: {fileID: 0}
+  m_HorizontalScrollbarVisibility: 0
+  m_VerticalScrollbarVisibility: 0
+  m_HorizontalScrollbarSpacing: 0
+  m_VerticalScrollbarSpacing: 0
+  m_OnValueChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.LoopScrollRect+ScrollRectEvent, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!1 &2141816332
 GameObject:
   m_ObjectHideFlags: 0

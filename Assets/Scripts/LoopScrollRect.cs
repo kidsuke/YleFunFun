@@ -3,6 +3,7 @@ using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using System;
 using System.Collections.Generic;
+using UniRx;
 
 namespace UnityEngine.UI
 {
@@ -18,24 +19,10 @@ namespace UnityEngine.UI
         [Tooltip("Total count, negative means INFINITE mode")]
 		public int totalCount;
 
-		LoopScrollDataSource dataSource;
+		[HideInInspector]
+		[NonSerialized]
+		protected LoopScrollDataSource dataSource;
 	
-		public List<Item> items; 
-		//[HideInInspector]
-		//[NonSerialized]
-/*		public/ LoopScrollDataSource dataSource = LoopScrollSendIndexSource.Instance;
-*/		//public object[] objectsToFill
-		//{
-			// wrapper for forward compatbility
-		//	set
-		//	{
-		//		if(value != null)
-		//			dataSource = new LoopScrollArraySource<object>(value);
-		//		else
-		//			dataSource = LoopScrollSendIndexSource.Instance
-	//}
-		//}
-
         [Tooltip("Threshold for preloading")]
         public float threshold = 100;
         [Tooltip("Reverse direction for dragging")]
@@ -292,7 +279,6 @@ namespace UnityEngine.UI
                 itemTypeStart = 0;
                 itemTypeEnd = 0;
                 totalCount = 0;
-				items = null;
                 for (int i = content.childCount - 1; i >= 0; i--)
                 {
                     ReturnObjectAndSendMessage(content.GetChild(i));
@@ -368,8 +354,6 @@ namespace UnityEngine.UI
 			if (!Application.isPlaying || prefabSource == null)
 				return;
 
-			dataSource = new LoopScrollListSource<Item>(items);
-			totalCount = items.Count;
 			prefabSource.InitPool();
 
             StopMovement();
@@ -620,7 +604,7 @@ namespace UnityEngine.UI
 
         public virtual void OnScroll(PointerEventData data)
         {
-            if (!IsActive())
+			if (!IsActive())
                 return;
 
             EnsureLayoutHasRebuilt();
@@ -684,7 +668,7 @@ namespace UnityEngine.UI
         }
 
         public virtual void OnDrag(PointerEventData eventData)
-        {
+		{
             if (eventData.button != PointerEventData.InputButton.Left)
                 return;
 

@@ -2,42 +2,32 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using UniRx;
 
-public class YleAPI : MonoBehaviour {
+public class YleAPI {
 	public static readonly string BASE_URL = "https://external.api.yle.fi";
 	public static readonly string VERSION = "v1";
 	private string mAppId = "";
 	private string mAppKey = "";
-	private int mLimit = 1;
-
-	public YleAPI() {
-		
-	}
-
-	void Start() {
-		StartCoroutine(GetSth());
-	}
 
 	//GET Request
-	IEnumerator GetSth() {
+	public IEnumerator GetSth(IObserver<YleResponse> observer, CancellationToken cancellationToken, string query, int limit = 30, int offset = 0) {
 		using (
 			UnityWebRequest webRequest = UnityWebRequest.Get(
 				BASE_URL + "/" + VERSION + "/programs/items.json?" + 
 				GetAppId() + "&" + GetAppKey() + "&" +
-				"availability=ondemand" + "&" +
-				GetLimit()
+				"availability=ondemand" + "&" + "limit=" + limit 
 			)
 		) {
 			yield return webRequest.Send();
 
 			if (webRequest.isHttpError || webRequest.isNetworkError) {
-				Debug.LogError("Web request error");
+				observer.OnError(new System.Exception(webRequest.error));
 			} else {
-				print(webRequest.downloadHandler.text);
-				YleResponse resp = JsonUtility.FromJson<YleResponse> (webRequest.downloadHandler.text);
-				print(resp);
+				YleResponse response = JsonUtility.FromJson<YleResponse>(webRequest.downloadHandler.text);
+				observer.OnNext(response);
+				observer.OnCompleted();
 			}
-				
 		}
 	}
 
@@ -48,9 +38,5 @@ public class YleAPI : MonoBehaviour {
 	public string GetAppKey()  {
 		return "app_key=" + mAppKey;
 	}
-
-	public string GetLimit() {
-		return "limit=" + mLimit;
-	}
-
+		
 }

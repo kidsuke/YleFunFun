@@ -57,7 +57,7 @@ namespace UnityEngine.UI
                         threshold = size * 1.1f;
                     }
                     changed = true;
-                }
+				}
             }
             else if (viewBounds.min.y > contentBounds.min.y + threshold)
             {

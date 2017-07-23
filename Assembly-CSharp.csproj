@@ -70,8 +70,11 @@
      <Compile Include="Assets\ScrollList.cs" />
      <Compile Include="Assets\ScrollView.cs" />
      <Compile Include="Assets\SuggestButton.cs" />
+     <Compile Include="Assets\Tobe renamed\MockData.cs" />
      <Compile Include="Assets\Tobe renamed\Remote\Model\YleResponse.cs" />
      <Compile Include="Assets\Tobe renamed\Remote\YleAPI.cs" />
+     <Compile Include="Assets\Tobe renamed\SearchResultsScrollView.cs" />
+     <Compile Include="Assets\Tobe renamed\SearchSceneController.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>D:/Unity/Unity2017/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
@@ -93,6 +96,10 @@
  <Reference Include="UnityEngine.HoloLens">
  <HintPath>D:/Unity/Unity2017/Editor/Data/UnityExtensions/Unity/UnityHoloLens/RuntimeEditor/UnityEngine.HoloLens.dll</HintPath>
  </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
+      <Project>{1C74CBC1-A5B1-304E-0C8F-5B49E85D6D5A}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -30,3 +30,4 @@ D:\Unity\Projects\YousicianAssignment\YleFunFun\Temp\bin\Debug\UnityEngine.Analy
 D:\Unity\Projects\YousicianAssignment\YleFunFun\Temp\bin\Debug\UnityEngine.HoloLens.xml
 D:\Unity\Projects\YousicianAssignment\YleFunFun\obj\Debug\Assembly-CSharp.dll
 D:\Unity\Projects\YousicianAssignment\YleFunFun\obj\Debug\Assembly-CSharp.pdb
+D:\Unity\Projects\YousicianAssignment\YleFunFun\Temp\bin\Debug\Assembly-CSharp-firstpass.pdb
