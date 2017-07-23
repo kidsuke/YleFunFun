@@ -278,7 +278,7 @@ namespace UnityEngine.UI
             {
                 itemTypeStart = 0;
                 itemTypeEnd = 0;
-                totalCount = 0;
+                
                 for (int i = content.childCount - 1; i >= 0; i--)
                 {
                     ReturnObjectAndSendMessage(content.GetChild(i));

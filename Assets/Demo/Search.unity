@@ -300,19 +300,19 @@ RectTransform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 870527499}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.61640996, y: 0.61640996, z: 0.61640996}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2141816333}
   m_Father: {fileID: 1560478770}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0}
-  m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 395, y: -196}
-  m_SizeDelta: {x: 20, y: 712.066}
-  m_Pivot: {x: 1, y: 0}
+  m_AnchorMin: {x: 1, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0.5}
+  m_AnchoredPosition: {x: -9.674988, y: 0.4985}
+  m_SizeDelta: {x: 19.350006, y: 563.2}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &870527501
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -929,7 +929,6 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.LoopScrollRect+ScrollRectEvent, Assembly-CSharp, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   m_Items: []
-  m_FirstInvocation: 0
 --- !u!1 &1630468126
 GameObject:
   m_ObjectHideFlags: 0

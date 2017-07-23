@@ -16,7 +16,7 @@ public class YleAPI {
 			UnityWebRequest webRequest = UnityWebRequest.Get(
 				BASE_URL + "/" + VERSION + "/programs/items.json?" + 
 				GetAppId() + "&" + GetAppKey() + "&" +
-				"availability=ondemand" + "&" + "limit=" + limit 
+				"availability=ondemand" + "&" + "limit=" + limit + "&" + "offset=" + offset
 			)
 		) {
 			yield return webRequest.Send();
