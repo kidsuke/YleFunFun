@@ -272,7 +272,7 @@ namespace UnityEngine.UI
             ResourceManager.Instance.ReturnObjectToPool(go.gameObject);
         }
 
-        public void ClearCells()
+        public virtual void ClearCells()
         {
             if (Application.isPlaying)
             {

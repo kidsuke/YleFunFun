@@ -402,7 +402,7 @@ GameObject:
   - component: {fileID: 1012083858}
   - component: {fileID: 1012083857}
   m_Layer: 5
-  m_Name: GameObject
+  m_Name: SearchSceneController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -419,6 +419,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01796030765ad344bbabcc7fe83d3a99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_SearchField: {fileID: 1395827928}
+  m_ScrollView: {fileID: 1560478772}
 --- !u!224 &1012083858
 RectTransform:
   m_ObjectHideFlags: 0
@@ -435,7 +437,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1062312273
 GameObject:
@@ -720,7 +722,7 @@ GameObject:
   - component: {fileID: 1395827929}
   - component: {fileID: 1395827928}
   m_Layer: 0
-  m_Name: InputField
+  m_Name: SearchInputField
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -853,7 +855,7 @@ GameObject:
   - component: {fileID: 1560478771}
   - component: {fileID: 1560478772}
   m_Layer: 5
-  m_Name: Loop Vertical Scroll Rect
+  m_Name: SearchResultsScrollView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
