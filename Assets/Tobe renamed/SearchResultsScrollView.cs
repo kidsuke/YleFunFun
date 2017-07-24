@@ -8,7 +8,7 @@ using UniRx;
 public class SearchResultsScrollView : LoopVerticalScrollRect {
 	public List<Item> m_Items;
 	private bool m_EndSearch;
-	private bool firstInvo;
+	private bool m_FirstInvocation;
 	private SearchSceneController m_Controller;
 	private LoopScrollDataSource m_DataSource {
 		get {
@@ -23,12 +23,20 @@ public class SearchResultsScrollView : LoopVerticalScrollRect {
 			return prefabSource;
 		}
 	}
+	private int m_TotalCount {
+		get {
+			return totalCount;
+		}
+		set {
+			totalCount = value;
+		}
+	}
 
 	// Use this for initialization
 	void Start () {
 		m_Items = new List<Item>();
 		m_EndSearch = false;
-		firstInvo = true;
+		m_FirstInvocation = true;
 		m_Controller = new SearchSceneController();
 		m_DataSource = new LoopScrollListSource<Item>(m_Items);
 		m_PrefabSource.InitPool();
@@ -39,7 +47,7 @@ public class SearchResultsScrollView : LoopVerticalScrollRect {
 				
 				if (totalCount > 0 && itemTypeEnd + 3 >= totalCount) {
 					print("Moreeeeeeeeeee");
-					//SearchForPrograms();
+					SearchForPrograms();
 				};
 			};
 
@@ -50,9 +58,10 @@ public class SearchResultsScrollView : LoopVerticalScrollRect {
 
 	protected void SearchForPrograms () {
 		m_Controller.SearchForPrograms()
-			//.ObserveOnMainThread() // Make sure that UI is updated on the main thread
-			.Subscribe(UpdateView) ;// Update UI with new data
-			//.AddTo(this); // This line guarantees that the subscription is disposed when the game object is destroyed
+					.ObserveOnMainThread() // Make sure that UI is updated on the main thread
+					.DelayFrameSubscription(2) // Make few frames delay to increase performance
+					.Subscribe(UpdateView) // Update UI with new data
+					.AddTo(this); // This line guarantees that the subscription is disposed when the game object is destroyed
 	}
 
 	public void UpdateView (List<Item> items) {
@@ -68,12 +77,12 @@ public class SearchResultsScrollView : LoopVerticalScrollRect {
 		}
 
 		m_Items.AddRange(items);
-		totalCount = m_Items.Count;
-		if (firstInvo) {
-			RefillCells();
-			firstInvo = false;
-		}
+		m_TotalCount = m_Items.Count;
 
-		//RefillCells(offset);
+		if (m_FirstInvocation) {
+			// Fill the game scene with cells of items. Because the scroll list will reuse the cells, this should only be called once 
+			RefillCells();
+			m_FirstInvocation = false;
+		}
 	}
 }
