@@ -51,33 +51,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Demo\Scripts\ScrollIndexCallback1.cs" />
-     <Compile Include="Assets\Demo\Scripts\ScrollIndexCallback2.cs" />
-     <Compile Include="Assets\Demo\Scripts\ScrollIndexCallback3.cs" />
-     <Compile Include="Assets\Demo\Scripts\TestCell.cs" />
-     <Compile Include="Assets\GameObjectPool.cs" />
-     <Compile Include="Assets\Item.cs" />
-     <Compile Include="Assets\RecycleList.cs" />
-     <Compile Include="Assets\Scripts\EasyObjectPool\EasyObjectPool.cs" />
-     <Compile Include="Assets\Scripts\EasyObjectPool\PoolObject.cs" />
-     <Compile Include="Assets\Scripts\EasyObjectPool\ResourceManager.cs" />
-     <Compile Include="Assets\Scripts\InitOnStart.cs" />
-     <Compile Include="Assets\Scripts\LoopHorizontalScrollRect.cs" />
-     <Compile Include="Assets\Scripts\LoopScrollDataSource.cs" />
-     <Compile Include="Assets\Scripts\LoopScrollPrefabSource.cs" />
-     <Compile Include="Assets\Scripts\LoopScrollRect.cs" />
-     <Compile Include="Assets\Scripts\LoopVerticalScrollRect.cs" />
-     <Compile Include="Assets\ScrollList.cs" />
-     <Compile Include="Assets\ScrollView.cs" />
-     <Compile Include="Assets\SuggestButton.cs" />
-     <Compile Include="Assets\Tobe renamed\Data\Local\SceneTransitionData.cs" />
-     <Compile Include="Assets\Tobe renamed\Data\Remote\Model\YleResponse.cs" />
-     <Compile Include="Assets\Tobe renamed\Data\Remote\YleAPI.cs" />
-     <Compile Include="Assets\Tobe renamed\DetailSceneController.cs" />
-     <Compile Include="Assets\Tobe renamed\LevelManager.cs" />
-     <Compile Include="Assets\Tobe renamed\MockData.cs" />
-     <Compile Include="Assets\Tobe renamed\SearchResultsScrollView.cs" />
-     <Compile Include="Assets\Tobe renamed\SearchSceneController.cs" />
+     <Compile Include="Assets\Scripts\Data\Local\SceneTransitionData.cs" />
+     <Compile Include="Assets\Scripts\Data\Remote\Model\YleResponse.cs" />
+     <Compile Include="Assets\Scripts\Data\Remote\YleAPI.cs" />
+     <Compile Include="Assets\Scripts\UI\DetailScene\DetailSceneController.cs" />
+     <Compile Include="Assets\Scripts\UI\LevelManager.cs" />
+     <Compile Include="Assets\Scripts\UI\Model\Item.cs" />
+     <Compile Include="Assets\Scripts\UI\SearchScene\SearchResultsCell.cs" />
+     <Compile Include="Assets\Scripts\UI\SearchScene\SearchResultsScrollView.cs" />
+     <Compile Include="Assets\Scripts\UI\SearchScene\SearchSceneController.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>D:/Unity/Unity2017/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

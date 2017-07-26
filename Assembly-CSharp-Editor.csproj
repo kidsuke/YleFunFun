@@ -51,9 +51,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\Editor\LoopScrollRectInspector.cs" />
-     <Compile Include="Assets\Scripts\Editor\SGDefaultControls.cs" />
-     <Compile Include="Assets\Scripts\Editor\SGMenuOptions.cs" />
+     <Compile Include="Assets\RecycleList\Editor\LoopScrollRectInspector.cs" />
+     <Compile Include="Assets\RecycleList\Editor\SGDefaultControls.cs" />
+     <Compile Include="Assets\RecycleList\Editor\SGMenuOptions.cs" />
  <Reference Include="UnityEditor.Advertisements">
  <HintPath>D:/Unity/Unity2017/Editor/Data/UnityExtensions/Unity/Advertisements/Editor/UnityEditor.Advertisements.dll</HintPath>
  </Reference>

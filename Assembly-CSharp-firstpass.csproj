@@ -51,6 +51,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Plugins\RecycleList\EasyObjectPool\EasyObjectPool.cs" />
+     <Compile Include="Assets\Plugins\RecycleList\EasyObjectPool\PoolObject.cs" />
+     <Compile Include="Assets\Plugins\RecycleList\EasyObjectPool\ResourceManager.cs" />
+     <Compile Include="Assets\Plugins\RecycleList\InitOnStart.cs" />
+     <Compile Include="Assets\Plugins\RecycleList\LoopHorizontalScrollRect.cs" />
+     <Compile Include="Assets\Plugins\RecycleList\LoopScrollDataSource.cs" />
+     <Compile Include="Assets\Plugins\RecycleList\LoopScrollPrefabSource.cs" />
+     <Compile Include="Assets\Plugins\RecycleList\LoopScrollRect.cs" />
+     <Compile Include="Assets\Plugins\RecycleList\LoopVerticalScrollRect.cs" />
      <Compile Include="Assets\Plugins\UniRx\Scripts\Asynchronous\WebRequestExtensions.cs" />
      <Compile Include="Assets\Plugins\UniRx\Scripts\Disposables\BooleanDisposable.cs" />
      <Compile Include="Assets\Plugins\UniRx\Scripts\Disposables\CancellationDisposable.cs" />
