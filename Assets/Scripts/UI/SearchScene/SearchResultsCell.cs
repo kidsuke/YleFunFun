@@ -9,7 +9,7 @@ public class SearchResultsCell : MonoBehaviour
 	public Button button;
 
 	private Item m_Item;
-    private SearchSceneController controller;    
+	private SearchSceneController m_Controller;    
 
 	void Start () {
 		if (text == null) {
@@ -19,11 +19,11 @@ public class SearchResultsCell : MonoBehaviour
 			throw new Exception(this.GetType().Name + ": UI Button not found");
 		}
 
-		controller = GameObject.FindObjectOfType<SearchSceneController>();        
+		m_Controller = GameObject.FindObjectOfType<SearchSceneController>();        
 
-		if (controller) {
+		if (m_Controller) {
             //button.onClick.AddListener(() => { print ("Hello"); controller.HandleOnItemClickedEvent(m_Item);});
-            button.onClick.AddListener(() => HandleOnItemClickedEvent(m_Item));
+            button.onClick.AddListener(() => HandleOnItemClickedEvent());
 		}
 	}
 
@@ -37,9 +37,8 @@ public class SearchResultsCell : MonoBehaviour
 		}
 	}
 
-    public void HandleOnItemClickedEvent(Item item) {
-        SceneTransitionData.currentItem = item;
-        SceneTransitionData.query = controller.Query;
-        controller.levelManager.LoadLevel("Detail");
+	public void HandleOnItemClickedEvent () {
+		SceneTransitionData.currentItem = m_Item;
+        m_Controller.levelManager.LoadLevel("Detail");
     }
 }

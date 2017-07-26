@@ -15,8 +15,13 @@ public class DetailSceneController : MonoBehaviour {
 	private Text m_Description;
 	public Text description { get { return m_Description; } set { m_Description = value; } }
 
-	private YleAPI m_API = new YleAPI();
-	private Item m_Item = SceneTransitionData.currentItem;
+	private YleAPI m_API;
+	private Item m_Item;
+
+	void Awake () {
+		m_API = new YleAPI();
+		m_Item = SceneTransitionData.currentItem;
+	}
 
 	// Use this for initialization
 	void Start () {

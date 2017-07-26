@@ -7,8 +7,9 @@ using UniRx;
 
 public class SearchResultsScrollView : LoopVerticalScrollRect {
 	
-	private List<Item> m_Items = new List<Item>();
+	private List<Item> m_Items;
 	public List<Item> items { get { return m_Items; } }
+
 	private bool m_NeedRefill;
 	private LoopScrollDataSource m_DataSource { get { return dataSource; } set { dataSource = value; } }
 	private LoopScrollPrefabSource m_PrefabSource { get { return prefabSource; } }
@@ -19,14 +20,15 @@ public class SearchResultsScrollView : LoopVerticalScrollRect {
 	public delegate void OnScrollChangedHandler (int totalCount, int firstVisibleItems, int lastVisibleItems);
 	public OnScrollChangedHandler scrollChangedHandler;
 
+	void Awake () {
+		m_Items = new List<Item>();
+		m_NeedRefill = true;
+		m_DataSource = new LoopScrollListSource<Item>(m_Items);
+	}
+
 	// Use this for initialization
 	void Start () {
-		//m_Items = new List<Item>();
-		m_NeedRefill = true;
-	
-		m_DataSource = new LoopScrollListSource<Item>(m_Items);
 		m_PrefabSource.InitPool();
-
 		onValueChanged.AddListener(position => scrollChangedHandler(m_TotalCount, m_FirstVisibleItemIndex, m_LastVisibleItemIndex));
 	}
 

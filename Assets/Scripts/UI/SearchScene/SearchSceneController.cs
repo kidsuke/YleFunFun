@@ -20,16 +20,18 @@ public class SearchSceneController : MonoBehaviour {
 	private BehaviorSubject<string> m_SearchEvent;
 	private bool m_EndPreviousSearch;
     // Store current search query to determine whether the next search is the same or different. Work with off-set
-    public string Query { get { return m_Query; } set { m_Query = value; } }
     private string m_Query;
 	// Store off-set of the current search so that it won't start from the beginning in the next search (if the next search query is the same)
 	private int m_Offset;
 
-	// Use this for initialization
-	void Start() {
+	void Awake () {
 		// Initialize variables
 		m_API = new YleAPI();
 		m_SearchEvent = new BehaviorSubject<string>(""); // Subject require instantiation with a default value
+	}
+
+	// Use this for initialization
+	void Start() {
 		if (m_SearchField == null) {
 			throw new Exception(this.GetType().Name + ": Input field for search not found");
 		}
@@ -40,23 +42,18 @@ public class SearchSceneController : MonoBehaviour {
 			throw new Exception(this.GetType().Name + ": Level manager for search not found");
 		}
 
+		RedisplaySearchResultsIfExist();
 		ResetSearchTrackingProperties();
 		BindEvents();
-
-		//m_SearchField.text = SceneTransitionData.query;
 	}
-	void Update () {
-		// Reset data
-//		SceneTransitionData.currentItem = null;
-//		if (SceneTransitionData.currentSearchResults != null && SceneTransitionData.currentSearchResults.Count != 0) {
-//			m_ScrollView.UpdateView(SceneTransitionData.currentSearchResults);
-//			SceneTransitionData.currentSearchResults = null;
-//		}
-		//SceneTransitionData.currentItem = null;
-//		if (SceneTransitionData.currentSearchResults != null && SceneTransitionData.currentSearchResults.Count != 0) {
-//			m_ScrollView.UpdateView(SceneTransitionData.currentSearchResults);
-//			//SceneTransitionData.currentSearchResults = null;
-//		}
+
+	private void RedisplaySearchResultsIfExist() {
+		if (SceneTransitionData.query != null && SceneTransitionData.query.Length != 0) {
+			m_SearchField.text = SceneTransitionData.query;
+		}
+		if (SceneTransitionData.currentSearchResults != null && SceneTransitionData.currentSearchResults.Count > 0) {
+			m_ScrollView.UpdateView(SceneTransitionData.currentSearchResults);
+		}
 	}
 
 	private void BindEvents() {
@@ -100,6 +97,9 @@ public class SearchSceneController : MonoBehaviour {
 					}
 				} else {
 					m_ScrollView.UpdateView(items);
+					// Cache data in case user go back from detail scence
+					SceneTransitionData.query = m_Query;
+					SceneTransitionData.currentSearchResults = m_ScrollView.items;
 				}
 			})
 			.AddTo(this);
@@ -110,12 +110,6 @@ public class SearchSceneController : MonoBehaviour {
 		m_Offset = 0;
 		m_EndPreviousSearch = false;
 	}
-
-	//public void HandleOnItemClickedEvent(Item item) {
-	//	SceneTransitionData.currentItem = item;
-	//	SceneTransitionData.query = m_Query;
-	//	m_LevelManager.LoadLevel("Detail");
-	//}
 
 	public void HandleOnScrollEvent (int totalCount, int firstVisibleItemIndex, int lastVisibleItemIndex) {
 		print("itemCount = " + totalCount + ", start = " + firstVisibleItemIndex + ", end = " + lastVisibleItemIndex);
