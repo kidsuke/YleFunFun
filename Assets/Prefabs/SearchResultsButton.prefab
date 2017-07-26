@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 114000045640882848}
   - component: {fileID: 114656075010449136}
   m_Layer: 0
-  m_Name: Button
+  m_Name: SearchResultsButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

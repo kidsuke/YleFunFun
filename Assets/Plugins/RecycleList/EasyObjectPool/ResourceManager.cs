@@ -34,21 +34,20 @@ public class ResourceManager : MonoBehaviour
             return mInstance;
         }
     }
-    public void InitPool(string poolName, int size, PoolInflationType type = PoolInflationType.DOUBLE)
+	public void InitPool(GameObject prefab, int size, PoolInflationType type = PoolInflationType.DOUBLE)
     {
-        if (poolDict.ContainsKey(poolName))
+		if (poolDict.ContainsKey(prefab.name))
         {
             return;
         }
         else
         {
-            GameObject pb = Resources.Load<GameObject>(poolName);
-            if (pb == null)
+			if (prefab == null)
             {
-                Debug.LogError("[ResourceManager] Invalide prefab name for pooling :" + poolName);
+				Debug.LogError("[ResourceManager] Invalide prefab name for pooling :" + prefab.name);
                 return;
             }
-            poolDict[poolName] = new Pool(poolName, pb, gameObject, size, type);
+			poolDict[prefab.name] = new Pool(prefab.name, prefab, gameObject, size, type);
         }
     }
     
@@ -58,31 +57,31 @@ public class ResourceManager : MonoBehaviour
     /// </summary>
     /// <param name="poolName"></param>
     /// <returns></returns>
-    public GameObject GetObjectFromPool(string poolName, bool autoActive = true, int autoCreate = 0)
+	public GameObject GetObjectFromPool(GameObject prefab, bool autoActive = true, int autoCreate = 0)
     {
         GameObject result = null;
 
-        if (!poolDict.ContainsKey(poolName) && autoCreate > 0)
+		if (!poolDict.ContainsKey(prefab.name) && autoCreate > 0)
         {
-            InitPool(poolName, autoCreate, PoolInflationType.INCREMENT);
+			InitPool(prefab, autoCreate, PoolInflationType.INCREMENT);
         }
 
-        if (poolDict.ContainsKey(poolName))
+		if (poolDict.ContainsKey(prefab.name))
         {
-            Pool pool = poolDict[poolName];
+			Pool pool = poolDict[prefab.name];
             result = pool.NextAvailableObject(autoActive);
             //scenario when no available object is found in pool
 #if UNITY_EDITOR
             if (result == null)
             {
-                Debug.LogWarning("[ResourceManager]:No object available in " + poolName);
+				Debug.LogWarning("[ResourceManager]:No object available in " + prefab.name);
             }
 #endif
         }
 #if UNITY_EDITOR
         else
         {
-            Debug.LogError("[ResourceManager]:Invalid pool name specified: " + poolName);
+			Debug.LogError("[ResourceManager]:Invalid pool name specified: " + prefab.name);
         }
 #endif
         return result;
