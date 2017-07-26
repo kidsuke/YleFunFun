@@ -70,9 +70,12 @@
      <Compile Include="Assets\ScrollList.cs" />
      <Compile Include="Assets\ScrollView.cs" />
      <Compile Include="Assets\SuggestButton.cs" />
+     <Compile Include="Assets\Tobe renamed\Data\Local\SceneTransitionData.cs" />
+     <Compile Include="Assets\Tobe renamed\Data\Remote\Model\YleResponse.cs" />
+     <Compile Include="Assets\Tobe renamed\Data\Remote\YleAPI.cs" />
+     <Compile Include="Assets\Tobe renamed\DetailSceneController.cs" />
+     <Compile Include="Assets\Tobe renamed\LevelManager.cs" />
      <Compile Include="Assets\Tobe renamed\MockData.cs" />
-     <Compile Include="Assets\Tobe renamed\Remote\Model\YleResponse.cs" />
-     <Compile Include="Assets\Tobe renamed\Remote\YleAPI.cs" />
      <Compile Include="Assets\Tobe renamed\SearchResultsScrollView.cs" />
      <Compile Include="Assets\Tobe renamed\SearchSceneController.cs" />
  <Reference Include="UnityEngine.UI">

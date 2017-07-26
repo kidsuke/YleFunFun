@@ -6,7 +6,9 @@ using UnityEngine.UI;
 using UniRx;
 
 public class SearchResultsScrollView : LoopVerticalScrollRect {
-	public List<Item> m_Items;
+	
+	private List<Item> m_Items = new List<Item>();
+	public List<Item> items { get { return m_Items; } }
 	private bool m_NeedRefill;
 	private LoopScrollDataSource m_DataSource { get { return dataSource; } set { dataSource = value; } }
 	private LoopScrollPrefabSource m_PrefabSource { get { return prefabSource; } }
@@ -19,7 +21,7 @@ public class SearchResultsScrollView : LoopVerticalScrollRect {
 
 	// Use this for initialization
 	void Start () {
-		m_Items = new List<Item>();
+		//m_Items = new List<Item>();
 		m_NeedRefill = true;
 	
 		m_DataSource = new LoopScrollListSource<Item>(m_Items);

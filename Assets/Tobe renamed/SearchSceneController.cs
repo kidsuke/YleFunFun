@@ -12,6 +12,9 @@ public class SearchSceneController : MonoBehaviour {
 	[SerializeField]
 	private SearchResultsScrollView m_ScrollView;
 	public SearchResultsScrollView searchResultsScrollView { get { return m_ScrollView; } set { m_ScrollView = value; } }
+	[SerializeField]
+	private LevelManager m_LevelManager;
+	public LevelManager levelManager { get { return m_LevelManager; } set { m_LevelManager = value; } }
 
 	private YleAPI m_API;
 	private BehaviorSubject<string> m_SearchEvent;
@@ -32,14 +35,33 @@ public class SearchSceneController : MonoBehaviour {
 		if (m_ScrollView == null) {
 			throw new Exception(this.GetType().Name + ": SearchResultsScrollView for search not found");
 		}
+		if (m_LevelManager == null) {
+			throw new Exception(this.GetType().Name + ": Level manager for search not found");
+		}
 
 		ResetSearchTrackingProperties();
 		BindEvents();
+
+		//m_SearchField.text = SceneTransitionData.query;
+	}
+	void Update () {
+		// Reset data
+//		SceneTransitionData.currentItem = null;
+//		if (SceneTransitionData.currentSearchResults != null && SceneTransitionData.currentSearchResults.Count != 0) {
+//			m_ScrollView.UpdateView(SceneTransitionData.currentSearchResults);
+//			SceneTransitionData.currentSearchResults = null;
+//		}
+		//SceneTransitionData.currentItem = null;
+//		if (SceneTransitionData.currentSearchResults != null && SceneTransitionData.currentSearchResults.Count != 0) {
+//			m_ScrollView.UpdateView(SceneTransitionData.currentSearchResults);
+//			//SceneTransitionData.currentSearchResults = null;
+//		}
 	}
 
 	private void BindEvents() {
 		m_SearchField
 				.OnValueChangedAsObservable()
+				.Skip(1) // Skip the default value
 				.Throttle(TimeSpan.FromSeconds(1f))
 				.Subscribe(query => {
 					if (query.Length == 0) {
@@ -61,7 +83,7 @@ public class SearchSceneController : MonoBehaviour {
 					ResetSearchTrackingProperties();
 					m_Query = query;
 				}
-				return Observable.FromCoroutine<YleResponse>((observer, cancellationToken) => m_API.GetSth(observer, cancellationToken, query, offset: m_Offset));
+				return Observable.FromCoroutine<YleResponse>((observer, cancellationToken) => m_API.GetPrograms(observer, cancellationToken, query, offset: m_Offset));
 			})
 			.Select(ToItems) // Map YleResponse to Item (`Select` operator is the same as `Map` operator in Reactive Programming)
 			.Do(items => m_Offset += (items.Count - 1)) // Cache the off-set
@@ -88,11 +110,16 @@ public class SearchSceneController : MonoBehaviour {
 		m_EndPreviousSearch = false;
 	}
 
+	public void HandleOnItemClickedEvent(Item item) {
+		SceneTransitionData.currentItem = item;
+		SceneTransitionData.query = m_Query;
+		m_LevelManager.LoadLevel("Detail");
+	}
+
 	public void HandleOnScrollEvent (int totalCount, int firstVisibleItemIndex, int lastVisibleItemIndex) {
 		print("itemCount = " + totalCount + ", start = " + firstVisibleItemIndex + ", end = " + lastVisibleItemIndex);
 		if (!m_EndPreviousSearch) {
 			if (totalCount > 0 && lastVisibleItemIndex + 3 >= totalCount) {
-				print("Moreeeeeeeeeee");
 				m_SearchEvent.OnNext(m_SearchEvent.Value);
 			};
 		};	
@@ -103,9 +130,11 @@ public class SearchSceneController : MonoBehaviour {
 		List<Item> items = new List<Item>();
 		for (int index = 0; index < response.data.Length; index++) {
 			Item item = new Item();
-			string title = (response.data[index].title.fi != null) ? response.data[index].title.fi : "No finnish title found";
 
-			item.title = title;
+			item.id = response.data[index].id;
+			item.imageId = response.data[index].image.id;
+			item.title = (response.data[index].title.fi != null) ? response.data[index].title.fi : "No finnish title found";
+			item.description = (response.data[index].description.fi !=null) ? response.data[index].description.fi : "No description found";
 			items.Add(item);
 		}
 		return items;

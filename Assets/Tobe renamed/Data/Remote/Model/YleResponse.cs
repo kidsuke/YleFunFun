@@ -18,7 +18,7 @@ public class YleResponse {
 	*/
 	[System.Serializable]
 	public class DataComponent {
-		public Description desciption;
+		public Description description;
 		public Video video;
 		public string typeMedia;
 		public string[] creator;
