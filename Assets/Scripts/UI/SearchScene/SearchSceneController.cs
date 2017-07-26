@@ -14,13 +14,14 @@ public class SearchSceneController : MonoBehaviour {
 	public SearchResultsScrollView searchResultsScrollView { get { return m_ScrollView; } set { m_ScrollView = value; } }
 	[SerializeField]
 	private LevelManager m_LevelManager;
-	public LevelManager levelManager { get { return m_LevelManager; } set { m_LevelManager = value; } }
+	public LevelManager levelManager { get { return m_LevelManager; } set { m_LevelManager = value; } }    
 
-	private YleAPI m_API;
+    private YleAPI m_API;
 	private BehaviorSubject<string> m_SearchEvent;
 	private bool m_EndPreviousSearch;
-	// Store current search query to determine whether the next search is the same or different. Work with off-set
-	private string m_Query;
+    // Store current search query to determine whether the next search is the same or different. Work with off-set
+    public string Query { get { return m_Query; } set { m_Query = value; } }
+    private string m_Query;
 	// Store off-set of the current search so that it won't start from the beginning in the next search (if the next search query is the same)
 	private int m_Offset;
 
@@ -110,11 +111,11 @@ public class SearchSceneController : MonoBehaviour {
 		m_EndPreviousSearch = false;
 	}
 
-	public void HandleOnItemClickedEvent(Item item) {
-		SceneTransitionData.currentItem = item;
-		SceneTransitionData.query = m_Query;
-		m_LevelManager.LoadLevel("Detail");
-	}
+	//public void HandleOnItemClickedEvent(Item item) {
+	//	SceneTransitionData.currentItem = item;
+	//	SceneTransitionData.query = m_Query;
+	//	m_LevelManager.LoadLevel("Detail");
+	//}
 
 	public void HandleOnScrollEvent (int totalCount, int firstVisibleItemIndex, int lastVisibleItemIndex) {
 		print("itemCount = " + totalCount + ", start = " + firstVisibleItemIndex + ", end = " + lastVisibleItemIndex);
