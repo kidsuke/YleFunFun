@@ -21,14 +21,6 @@ public class ResourceManager : MonoBehaviour
                 // Kanglai: if we have `GO.hideFlags |= HideFlags.DontSave;`, we will encounter Destroy problem when exit playing
                 // However we should keep using this in Play mode only!
                 mInstance = GO.GetComponent<ResourceManager>();
-                if (Application.isPlaying)
-                {
-                    DontDestroyOnLoad(mInstance.gameObject);
-                }
-                else
-                {
-                    Debug.LogWarning("[ResourceManager] You'd better ignore ResourceManager in Editor mode");
-                }
             }
 
             return mInstance;
