@@ -419,9 +419,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01796030765ad344bbabcc7fe83d3a99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SearchField: {fileID: 1395827928}
-  m_ScrollView: {fileID: 1560478772}
-  m_LevelManager: {fileID: 1141689976}
 --- !u!224 &1012083858
 RectTransform:
   m_ObjectHideFlags: 0
@@ -572,12 +569,6 @@ MonoBehaviour:
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 1
   m_ChildControlHeight: 1
---- !u!114 &1141689976 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114084262026026226, guid: b542db679efbc4649818fa5b7675f7ce,
-    type: 2}
-  m_PrefabInternal: {fileID: 1878575248}
-  m_Script: {fileID: 11500000, guid: d9cab6a72005f6b4fb2005f141b8811b, type: 3}
 --- !u!1 &1284840527
 GameObject:
   m_ObjectHideFlags: 0
@@ -936,6 +927,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.LoopScrollRect+ScrollRectEvent, Assembly-CSharp-firstpass,
       Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_SearchField: {fileID: 1395827928}
 --- !u!1 &1630468126
 GameObject:
   m_ObjectHideFlags: 0

@@ -14,7 +14,7 @@ public class YleAPI {
 	private string m_AppKey = "96da296c91609b7835e8bb861a4ca6fc";
 
 	//GET Request
-	public IEnumerator GetPrograms(IObserver<YleResponse> observer, CancellationToken cancellationToken, string query, int limit = 30, int offset = 0) {
+	public IEnumerator GetPrograms(IObserver<YleResponse> observer, CancellationToken cancellationToken, string query, int offset = 0, int limit = 30) {
 		using (
 			UnityWebRequest webRequest = UnityWebRequest.Get(
 				UrlBuilder.Create(BASE_URL)

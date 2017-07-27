@@ -3,42 +3,41 @@ using UnityEngine.UI;
 using System.Collections;
 using System;
 
-public class SearchResultsCell : MonoBehaviour 
-{
-	public Text text;
-	public Button button;
+public class SearchResultsCell : MonoBehaviour {
+	
+	[SerializeField]
+	private Text m_Text;
+	public Text text { get { return m_Text; } set { m_Text = value; } }
+	[SerializeField]
+	private Button m_Button; 
+	public Button button { get { return m_Button; } set { m_Button = value; } }
 
 	private Item m_Item;
-	private SearchSceneController m_Controller;    
+	private LevelManager m_LevelManager;
+
+	void Awake () {
+		m_LevelManager = GameObject.FindObjectOfType<LevelManager>();
+	}
 
 	void Start () {
-		if (text == null) {
+		if (m_Text == null) {
 			throw new Exception(this.GetType().Name + ": UI Text not found");
 		}
-		if (button == null) {
+		if (m_Button == null) {
 			throw new Exception(this.GetType().Name + ": UI Button not found");
 		}
-
-		m_Controller = GameObject.FindObjectOfType<SearchSceneController>();        
-
-		if (m_Controller) {
-            //button.onClick.AddListener(() => { print ("Hello"); controller.HandleOnItemClickedEvent(m_Item);});
-            button.onClick.AddListener(() => HandleOnItemClickedEvent());
-		}
+			
+		m_Button.onClick.AddListener(HandleOnItemClickedEvent);
 	}
 
 	void ScrollCellContent (Item item) 
 	{
 		m_Item = item;
-
-		if (text != null) 
-		{
-			text.text = item.title;
-		}
+		m_Text.text = item.title;
 	}
 
 	public void HandleOnItemClickedEvent () {
 		SceneTransitionData.currentItem = m_Item;
-        m_Controller.levelManager.LoadLevel("Detail");
+		m_LevelManager.LoadLevel("Detail");
     }
 }
