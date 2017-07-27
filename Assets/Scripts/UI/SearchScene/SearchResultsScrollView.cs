@@ -50,9 +50,11 @@ public class SearchResultsScrollView : LoopVerticalScrollRect {
 			.Subscribe(query => {
 				if (query.Length == 0) {
 					// User has cleared the text. Clear all the results and reset tracking properties
+					m_Controller.SetState(SearchSceneController.SearchSceneState.STATE_EMPTY);
 					ClearCells();
 					ResetSearchTrackingProperties();
 				} else {
+					m_Controller.SetState(SearchSceneController.SearchSceneState.STATE_LOADED);
 					if (!m_Query.Equals(query)) {
 						ResetSearchTrackingProperties();
 						m_Query = query;
@@ -87,8 +89,12 @@ public class SearchResultsScrollView : LoopVerticalScrollRect {
 								// Mark m_EndPreviousSearch as true to prevent auto search when scrolling
 								m_EndPreviousSearch = true;
 							}
+							if (m_Programs.Count <= 0) {
+								m_Controller.SetState(SearchSceneController.SearchSceneState.STATE_NOT_FOUND);
+							}
 						} else {
 							UpdateView(programs);
+							
 							// Cache data in case user go back from detail scence
 							SceneTransitionData.query = m_Query;
 							SceneTransitionData.currentSearchResults = m_Programs;
