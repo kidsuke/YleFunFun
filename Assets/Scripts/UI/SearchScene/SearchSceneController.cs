@@ -14,23 +14,23 @@ public class SearchSceneController : MonoBehaviour {
 		m_API = new YleAPI();
 	}
 
-	public IObservable<List<Item>> GetPrograms (string query = "", int offset = 0) {
+	public IObservable<List<Program>> GetPrograms (string query = "", int offset = 0) {
 		return Observable.FromCoroutine<YleResponse>((observer, cancellationToken) => m_API.GetPrograms(observer, cancellationToken, query, offset))
-						 .Select(ToItems) ;// Map YleResponse to Item (`Select` operator is the same as `Map` operator in Reactive Programming)				 
+						 .Select(ToPrograms) ;// Map YleResponse to Item (`Select` operator is the same as `Map` operator in Reactive Programming)				 
 	}
 		
 	// Use this for mapping YleResponse to Item
-	public List<Item> ToItems (YleResponse response) {
-		List<Item> items = new List<Item>();
+	public List<Program> ToPrograms (YleResponse response) {
+		List<Program> programs = new List<Program>();
 		for (int index = 0; index < response.data.Length; index++) {
-			Item item = new Item();
+			Program program = new Program();
 
-			item.id = response.data[index].id;
-			item.imageId = response.data[index].image.id;
-			item.title = (response.data[index].title.fi != null) ? response.data[index].title.fi : "No finnish title found";
-			item.description = (response.data[index].description.fi !=null) ? response.data[index].description.fi : "No description found";
-			items.Add(item);
+			program.id = response.data[index].id;
+			program.imageId = response.data[index].image.id;
+			program.title = (response.data[index].title.fi != null) ? response.data[index].title.fi : "No finnish title found";
+			program.description = (response.data[index].description.fi !=null) ? response.data[index].description.fi : "No description found";
+			programs.Add(program);
 		}
-		return items;
+		return programs;
 	}
 }

@@ -12,7 +12,7 @@ public class SearchResultsCell : MonoBehaviour {
 	private Button m_Button; 
 	public Button button { get { return m_Button; } set { m_Button = value; } }
 
-	private Item m_Item;
+	private Program m_Program;
 	private LevelManager m_LevelManager;
 
 	void Awake () {
@@ -30,14 +30,14 @@ public class SearchResultsCell : MonoBehaviour {
 		m_Button.onClick.AddListener(HandleOnItemClickedEvent);
 	}
 
-	void ScrollCellContent (Item item) 
+	void ScrollCellContent (Program program) 
 	{
-		m_Item = item;
-		m_Text.text = item.title;
+		m_Program = program;
+		m_Text.text = program.title;
 	}
 
 	public void HandleOnItemClickedEvent () {
-		SceneTransitionData.currentItem = m_Item;
+		SceneTransitionData.currentProgram = m_Program;
 		m_LevelManager.LoadLevel("Detail");
     }
 }

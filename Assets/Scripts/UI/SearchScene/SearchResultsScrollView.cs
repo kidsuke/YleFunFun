@@ -11,7 +11,7 @@ public class SearchResultsScrollView : LoopVerticalScrollRect {
 	private InputField m_SearchField;
 	public InputField searchField { get { return m_SearchField; } set { m_SearchField = value; } }
 
-	private List<Item> m_Items;
+	private List<Program> m_Programs;
 	private SearchSceneController m_Controller;
 	private bool m_EndPreviousSearch;
 	private bool m_NeedRefill;
@@ -26,14 +26,11 @@ public class SearchResultsScrollView : LoopVerticalScrollRect {
 	private int m_FirstVisibleItemIndex { get { return itemTypeStart; } }
 	private int m_LastVisibleItemIndex { get { return itemTypeEnd; } }
 
-	public delegate void OnScrollChangedHandler (int totalCount, int firstVisibleItems, int lastVisibleItems);
-	public OnScrollChangedHandler scrollChangedHandler;
-
 	void Awake () {
-		m_Items = new List<Item>();
+		m_Programs = new List<Program>();
 		m_NeedRefill = true;
-		m_DataSource = new LoopScrollListSource<Item>(m_Items);
-
+		m_DataSource = new LoopScrollListSource<Program>(m_Programs);
+		m_Controller = GameObject.FindObjectOfType<SearchSceneController>();
 	}
 
 	// Use this for initialization
@@ -42,7 +39,6 @@ public class SearchResultsScrollView : LoopVerticalScrollRect {
 		RedisplaySearchResultsIfExist();
 		ResetSearchTrackingProperties();
 		BindEvents();
-		m_Controller = GameObject.FindObjectOfType<SearchSceneController>();
 	}
 
 	private void BindEvents() {
@@ -80,10 +76,10 @@ public class SearchResultsScrollView : LoopVerticalScrollRect {
 
 	public void SearchForPrograms () {
 		m_Controller.GetPrograms(m_Query, m_Offset)
-					.Do(items => m_Offset += (items.Count - 1)) // Cache the off-set
+					.Do(programs => m_Offset += (programs.Count - 1)) // Cache the off-set
 					.DelayFrameSubscription(2) // Delay some frames to improve performance
-					.Subscribe(items => {
-						if (items.Count == 0) {
+					.Subscribe(programs => {
+						if (programs.Count == 0) {
 							// If no results found
 							if (!m_EndPreviousSearch) {
 								// Auto search means continuing to provide more results of the previous search if possible (because we just provide 10 results at a time)
@@ -92,17 +88,17 @@ public class SearchResultsScrollView : LoopVerticalScrollRect {
 								m_EndPreviousSearch = true;
 							}
 						} else {
-							UpdateView(items);
+							UpdateView(programs);
 							// Cache data in case user go back from detail scence
 							SceneTransitionData.query = m_Query;
-							SceneTransitionData.currentSearchResults = m_Items;
+							SceneTransitionData.currentSearchResults = m_Programs;
 						}
 					})
 					;
 	}
 
 	public override void ClearCells() {
-		m_Items.Clear();
+		m_Programs.Clear();
 		m_TotalCount = 0;
 		m_NeedRefill = true;
 		base.ClearCells();
@@ -123,9 +119,9 @@ public class SearchResultsScrollView : LoopVerticalScrollRect {
 		}
 	}
 
-	public void UpdateView (List<Item> items) {
-		m_Items.AddRange(items);
-		m_TotalCount = m_Items.Count;
+	public void UpdateView (List<Program> programs) {
+		m_Programs.AddRange(programs);
+		m_TotalCount = m_Programs.Count;
 
 		if (m_NeedRefill) {
 			// Fill the game scene with cells of items. Because the scroll list will reuse the cells, this should only be called once 

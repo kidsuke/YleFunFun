@@ -56,7 +56,7 @@
      <Compile Include="Assets\Scripts\Data\Remote\YleAPI.cs" />
      <Compile Include="Assets\Scripts\UI\DetailScene\DetailSceneController.cs" />
      <Compile Include="Assets\Scripts\UI\LevelManager.cs" />
-     <Compile Include="Assets\Scripts\UI\Model\Item.cs" />
+     <Compile Include="Assets\Scripts\UI\Model\Program.cs" />
      <Compile Include="Assets\Scripts\UI\SearchScene\SearchResultsCell.cs" />
      <Compile Include="Assets\Scripts\UI\SearchScene\SearchResultsScrollView.cs" />
      <Compile Include="Assets\Scripts\UI\SearchScene\SearchSceneController.cs" />

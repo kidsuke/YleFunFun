@@ -19,22 +19,22 @@ public class DetailSceneController : MonoBehaviour {
 	public Text description { get { return m_Description; } set { m_Description = value; } }
 
 	private YleAPI m_API;
-	private Item m_Item;
+	private Program m_Program;
 
 	void Awake () {
 		m_API = new YleAPI();
-		m_Item = SceneTransitionData.currentItem;
+		m_Program = SceneTransitionData.currentProgram;
 	}
 
 	// Use this for initialization
 	void Start () {
 		GetCoverImage();
-		m_Title.text = m_Item.title;
-		m_Description.text = m_Item.description;
+		m_Title.text = m_Program.title;
+		m_Description.text = m_Program.description;
 	}
 
 	public void GetCoverImage() {
-		string imageId = m_Item.imageId;
+		string imageId = m_Program.imageId;
 		Observable.FromCoroutine<Texture>((observer, cancellationToken) => m_API.GetCoverImage(observer, cancellationToken, imageId))
 				  .Subscribe(
 						texture => {
