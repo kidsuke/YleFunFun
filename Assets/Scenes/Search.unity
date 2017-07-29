@@ -1148,7 +1148,6 @@ GameObject:
   - component: {fileID: 1528291757}
   - component: {fileID: 1528291759}
   - component: {fileID: 1528291758}
-  - component: {fileID: 1528291760}
   m_Layer: 5
   m_Name: EmptySearch
   m_TagString: Untagged
@@ -1209,17 +1208,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1528291756}
---- !u!225 &1528291760
-CanvasGroup:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1528291756}
-  m_Enabled: 0
-  m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
-  m_IgnoreParentGroups: 0
 --- !u!1 &1560478769
 GameObject:
   m_ObjectHideFlags: 0
@@ -1230,7 +1218,6 @@ GameObject:
   - component: {fileID: 1560478770}
   - component: {fileID: 1560478771}
   - component: {fileID: 1560478772}
-  - component: {fileID: 1560478773}
   m_Layer: 5
   m_Name: SearchResultsScrollView
   m_TagString: Untagged
@@ -1308,17 +1295,6 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.LoopScrollRect+ScrollRectEvent, Assembly-CSharp-firstpass,
       Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
   m_SearchField: {fileID: 1395827928}
---- !u!225 &1560478773
-CanvasGroup:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1560478769}
-  m_Enabled: 0
-  m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 0
-  m_IgnoreParentGroups: 0
 --- !u!1 &1630468126
 GameObject:
   m_ObjectHideFlags: 0
@@ -1492,7 +1468,6 @@ GameObject:
   - component: {fileID: 1674719969}
   - component: {fileID: 1674719971}
   - component: {fileID: 1674719970}
-  - component: {fileID: 1674719972}
   m_Layer: 5
   m_Name: NoResultFound
   m_TagString: Untagged
@@ -1554,17 +1529,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1674719968}
---- !u!225 &1674719972
-CanvasGroup:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1674719968}
-  m_Enabled: 0
-  m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
-  m_IgnoreParentGroups: 0
 --- !u!1001 &1878575248
 Prefab:
   m_ObjectHideFlags: 0

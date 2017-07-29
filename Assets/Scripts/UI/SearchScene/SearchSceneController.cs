@@ -64,42 +64,19 @@ public class SearchSceneController : MonoBehaviour {
 	private void SetupView () {
 		switch(m_State) {
 			case SearchSceneState.STATE_EMPTY:
-//				ShowUIElement(m_EmptySearch);
-//				ShowUIElement(m_ScrollView.GetComponent<RectTransform>(), false);
-//				ShowUIElement(m_NoResultFound, false);
-			m_EmptySearch.gameObject.SetActive(true);
-			m_NoResultFound.gameObject.SetActive(false);
-			//m_ScrollView.enabled = false;
+				m_EmptySearch.gameObject.SetActive(true);
+				m_NoResultFound.gameObject.SetActive(false);
 				break;
 			case SearchSceneState.STATE_NOT_FOUND:
-			m_NoResultFound.gameObject.SetActive(true);
-			m_EmptySearch.gameObject.SetActive(false);
-			//m_ScrollView.enabled = false;
-//				ShowUIElement(m_NoResultFound);
-//				ShowUIElement(m_EmptySearch, false);
-//				ShowUIElement(m_ScrollView.GetComponent<RectTransform>(), false);
+				m_NoResultFound.gameObject.SetActive(true);
+				m_EmptySearch.gameObject.SetActive(false);
 				break;
 			case SearchSceneState.STATE_LOADED:
-			//m_ScrollView.enabled = true;
-			m_EmptySearch.gameObject.SetActive(false);
-			m_NoResultFound.gameObject.SetActive(false);
-//				ShowUIElement(m_ScrollView.GetComponent<RectTransform>());
-//				ShowUIElement(m_EmptySearch, false);
-//				ShowUIElement(m_NoResultFound, false);
+				m_EmptySearch.gameObject.SetActive(false);
+				m_NoResultFound.gameObject.SetActive(false);
 				break;
 			default:
 				break;
-		}
-	}
-
-	private void ShowUIElement(RectTransform rect, bool show = true) {
-		CanvasGroup canvasGroup = rect.GetComponent<CanvasGroup>();
-		if (show) {
-			canvasGroup.alpha = 1;
-			canvasGroup.interactable = true;
-		} else {
-			canvasGroup.alpha = 0;
-			canvasGroup.interactable = false;
 		}
 	}
 }
