@@ -12,20 +12,20 @@ public class SearchSceneController : MonoBehaviour {
 	}
 
 	[SerializeField]
-	private RectTransform m_EmptySearch;
+	private RectTransform m_EmptySearch; // The view to show when no search is conducted
 	public RectTransform emptySearch { get { return m_EmptySearch; } set { m_EmptySearch = value; } }
 	[SerializeField]
-	private RectTransform m_NoResultFound;
+	private RectTransform m_NoResultFound; // The view to show when no result is found
 	public RectTransform noResultFound { get { return m_NoResultFound; } set { m_NoResultFound = value; } }
 	[SerializeField]
-	private SearchResultsScrollView m_ScrollView;
+	private SearchResultsScrollView m_ScrollView; // The view to show the search results
 	public SearchResultsScrollView scrollView { get { return m_ScrollView; } set { m_ScrollView = value; } }
 	[SerializeField]
-	private GameObject m_LoadingIndicator;
+	private GameObject m_LoadingIndicator; // The view to show when waiting for the search results
 	public GameObject loadingIndicator { get { return m_LoadingIndicator; } set { m_LoadingIndicator = value; }}
 
     private YleAPI m_API;
-	private SearchSceneState m_State;
+	private SearchSceneState m_State; // The current state of the search scene
 
 	void Awake () {
 		// Initialize variables
@@ -37,6 +37,7 @@ public class SearchSceneController : MonoBehaviour {
 		SetupView();
 	}
 
+	// Get programs from Yle
 	public IObservable<List<Program>> GetPrograms (string query = "", int offset = 0) {
 		return Observable.FromCoroutine<YleResponse>((observer, cancellationToken) => m_API.GetPrograms(observer, cancellationToken, query, offset))
 						 .Select(ToPrograms) ;// Map YleResponse to Item (`Select` operator is the same as `Map` operator in Reactive Programming)				 

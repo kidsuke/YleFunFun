@@ -30,6 +30,7 @@ public class SearchResultsCell : MonoBehaviour {
 		m_Button.onClick.AddListener(HandleOnItemClickedEvent);
 	}
 
+	// This method is used by the data source in the scroll view to provide data
 	void ScrollCellContent (Program program) 
 	{
 		m_Program = program;

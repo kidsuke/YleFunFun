@@ -33,6 +33,7 @@ public class DetailSceneController : MonoBehaviour {
 		m_Description.text = m_Program.description;
 	}
 
+	// Get a cover image from Yle
 	public void GetCoverImage() {
 		string imageId = m_Program.imageId;
 		Observable.FromCoroutine<Texture>((observer, cancellationToken) => m_API.GetCoverImage(observer, cancellationToken, imageId))

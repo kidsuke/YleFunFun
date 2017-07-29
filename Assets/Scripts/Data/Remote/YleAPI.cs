@@ -60,6 +60,7 @@ public class YleAPI {
 		}
 	}
 
+	// A utility to simplify the building Url process
 	public class UrlBuilder {
 		private StringBuilder m_Builder = new StringBuilder();
 		private bool m_BeginQuery = false;

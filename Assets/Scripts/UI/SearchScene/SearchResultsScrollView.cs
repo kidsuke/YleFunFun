@@ -13,18 +13,18 @@ public class SearchResultsScrollView : LoopVerticalScrollRect {
 
 	private List<Program> m_Programs;
 	private SearchSceneController m_Controller;
-	private bool m_EndPreviousSearch;
-	private bool m_NeedRefill;
-	// Store current search query to determine whether the next search is the same or different. Work with off-set
-	private string m_Query;
-	// Store off-set of the current search so that it won't start from the beginning in the next search (if the next search query is the same)
-	private int m_Offset;
+	private bool m_EndPreviousSearch; // Determine whether the previous search should be ended
+	private bool m_NeedRefill; // Determine whether the scroll view need to be refilled
+	private string m_Query; // Store current search query to determine whether the next search is the same or different. Work with off-set
+	private int m_Offset; // Store off-set of the current search so that it won't start from the beginning in the next search (if the next search query is the same)
 
-	private LoopScrollDataSource m_DataSource { get { return dataSource; } set { dataSource = value; } }
-	private LoopScrollPrefabSource m_PrefabSource { get { return prefabSource; } }
-	private int m_TotalCount { get { return totalCount; } set { totalCount = value; } }
-	private int m_FirstVisibleItemIndex { get { return itemTypeStart; } }
-	private int m_LastVisibleItemIndex { get { return itemTypeEnd; } }
+	// The SearchResultsScrollView is based on an open source and in my opinion it may be hard to undestand at first...
+	// Therefore, I decide to rename the variables to increase readability and add some comment
+	private LoopScrollDataSource m_DataSource { get { return dataSource; } set { dataSource = value; } } // A data source to provide data from the data list for each cell
+	private LoopScrollPrefabSource m_PrefabSource { get { return prefabSource; } } // A prefab source to provide a pool of objects based on a given prefab
+	private int m_TotalCount { get { return totalCount; } set { totalCount = value; } } // The total number of items of the data list (not the current displated cells)
+	private int m_FirstVisibleItemIndex { get { return itemTypeStart; } } // The index of the first visible cell
+	private int m_LastVisibleItemIndex { get { return itemTypeEnd; } } // The index of the last visible cell
 
 	void Awake () {
 		m_Programs = new List<Program>();
@@ -42,35 +42,31 @@ public class SearchResultsScrollView : LoopVerticalScrollRect {
 	}
 
 	private void BindEvents() {
-		m_SearchField
+		m_SearchField // Listen to text changed event
 			.OnValueChangedAsObservable()
 			.Skip(1) // Skip the default value
 			.Throttle(TimeSpan.FromSeconds(1f)) // Since the user may input too fast, this function will take an emitted value from the stream every 1 second. 
 												// Values which are emitted within that 1 second are ignored
 			.Subscribe(query => {
+				// New query has been entered...
+				// Clear all the results and reset tracking properties
+				ClearCells();
+				ResetSearchTrackingProperties();
 				if (query.Length == 0) {
-					// User has cleared the text. Clear all the results and reset tracking properties
+					// If user has cleared the text
 					m_Controller.SetState(SearchSceneController.SearchSceneState.STATE_EMPTY);
-					ClearCells();
-					ResetSearchTrackingProperties();
 				} else {
-					if (!m_Query.Equals(query)) {
-						m_Controller.SetState(SearchSceneController.SearchSceneState.STATE_LOADING);
-						ClearCells();
-						ResetSearchTrackingProperties();
-						m_Query = query;
-
-						SearchForPrograms();
-					}
+					m_Controller.SetState(SearchSceneController.SearchSceneState.STATE_LOADING);
+					m_Query = query;
+					SearchForPrograms();
 				}
 			})
 			.AddTo(this);
 
-		onValueChanged.AddListener(HandleOnScrollEvent);
+		onValueChanged.AddListener(HandleOnScrollEvent); // Listen to scrolling event
 	}
 
 	public void HandleOnScrollEvent (Vector2 position) {
-		print("itemCount = " + m_TotalCount + ", start = " + m_FirstVisibleItemIndex + ", end = " + m_LastVisibleItemIndex);
 		if (!m_EndPreviousSearch) {
 			if (m_TotalCount > 0 && m_LastVisibleItemIndex + 3 >= m_TotalCount) {
 				SearchForPrograms();
@@ -86,7 +82,7 @@ public class SearchResultsScrollView : LoopVerticalScrollRect {
 						if (programs.Count == 0) {
 							// If no results found
 							if (!m_EndPreviousSearch) {
-								// Auto search means continuing to provide more results of the previous search if possible (because we just provide 10 results at a time)
+								// Auto search means continuing to provide more results of the previous search if possible when scrolling (because we just provide 10 results at a time)
 								// If the amount of items received is 0, it means no (or no more) result found.
 								// Mark m_EndPreviousSearch as true to prevent auto search when scrolling
 								m_EndPreviousSearch = true;
@@ -107,6 +103,7 @@ public class SearchResultsScrollView : LoopVerticalScrollRect {
 	}
 
 	public override void ClearCells() {
+		//Remove all the cells from the scroll view
 		m_Programs.Clear();
 		m_TotalCount = 0;
 		m_NeedRefill = true;
@@ -133,7 +130,7 @@ public class SearchResultsScrollView : LoopVerticalScrollRect {
 		m_TotalCount = m_Programs.Count;
 
 		if (m_NeedRefill) {
-			// Fill the game scene with cells of items. Because the scroll list will reuse the cells, this should only be called once 
+			// Fill the game scene with cells of items. Because the scroll view will reuse the cells, this should only be done when ClearCells is called
 			RefillCells();
 			m_NeedRefill = false;
 		}
