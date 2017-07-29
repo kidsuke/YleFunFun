@@ -54,8 +54,8 @@ public class SearchResultsScrollView : LoopVerticalScrollRect {
 					ClearCells();
 					ResetSearchTrackingProperties();
 				} else {
-					m_Controller.SetState(SearchSceneController.SearchSceneState.STATE_LOADED);
 					if (!m_Query.Equals(query)) {
+						ClearCells();
 						ResetSearchTrackingProperties();
 						m_Query = query;
 					}
@@ -122,11 +122,12 @@ public class SearchResultsScrollView : LoopVerticalScrollRect {
 		}
 		if (SceneTransitionData.currentSearchResults != null && SceneTransitionData.currentSearchResults.Count > 0) {
 			UpdateView(SceneTransitionData.currentSearchResults);
-			m_Controller.SetState(SearchSceneController.SearchSceneState.STATE_LOADED);
 		}
 	}
 
 	public void UpdateView (List<Program> programs) {
+		m_Controller.SetState(SearchSceneController.SearchSceneState.STATE_LOADED);
+
 		m_Programs.AddRange(programs);
 		m_TotalCount = m_Programs.Count;
 
