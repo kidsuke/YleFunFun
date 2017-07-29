@@ -19,7 +19,7 @@ public class YleAPI {
 			UnityWebRequest webRequest = UnityWebRequest.Get(
 				UrlBuilder.Create(BASE_URL)
 				.Path(VERSION).Path("programs").Path("items.json")
-				.Query("availability", "ondemand").Query("limit", limit.ToString()).Query("offset", offset.ToString())
+				.Query("availability", "ondemand").Query("limit", limit.ToString()).Query("offset", offset.ToString()).Query("q", query)
 				.Query("app_id", m_AppId).Query("app_key", m_AppKey)
 				.Build()
 			)
