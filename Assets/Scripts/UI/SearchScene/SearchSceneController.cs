@@ -27,10 +27,10 @@ public class SearchSceneController : MonoBehaviour {
 	void Awake () {
 		// Initialize variables
 		m_API = new YleAPI();
-		m_State = SearchSceneState.STATE_EMPTY;
 	}
 
 	void Start () {
+		m_State = SearchSceneState.STATE_EMPTY;
 		SetupView();
 	}
 
@@ -55,40 +55,28 @@ public class SearchSceneController : MonoBehaviour {
 	}
 
 	public void SetState (SearchSceneState state) {
-		m_State = state;
-		SetupView();
+		if (m_State != state) {
+			m_State = state;
+			SetupView();
+		}
 	}
 
 	private void SetupView () {
 		switch(m_State) {
 			case SearchSceneState.STATE_EMPTY:
-				ShowUIElement(m_EmptySearch);
-				ShowUIElement(m_ScrollView.GetComponent<RectTransform>(), false);
-				ShowUIElement(m_NoResultFound, false);
+				m_EmptySearch.gameObject.SetActive(true);
+				m_NoResultFound.gameObject.SetActive(false);
 				break;
 			case SearchSceneState.STATE_NOT_FOUND:
-				ShowUIElement(m_NoResultFound);
-				ShowUIElement(m_EmptySearch, false);
-				ShowUIElement(m_ScrollView.GetComponent<RectTransform>(), false);
+				m_NoResultFound.gameObject.SetActive(true);
+				m_EmptySearch.gameObject.SetActive(false);
 				break;
 			case SearchSceneState.STATE_LOADED:
-				ShowUIElement(m_ScrollView.GetComponent<RectTransform>());
-				ShowUIElement(m_EmptySearch, false);
-				ShowUIElement(m_NoResultFound, false);
+				m_EmptySearch.gameObject.SetActive(false);
+				m_NoResultFound.gameObject.SetActive(false);
 				break;
 			default:
 				break;
-		}
-	}
-
-	private void ShowUIElement(RectTransform rect, bool show = true) {
-		CanvasGroup canvasGroup = rect.GetComponent<CanvasGroup>();
-		if (show) {
-			canvasGroup.alpha = 1;
-			canvasGroup.interactable = true;
-		} else {
-			canvasGroup.alpha = 0;
-			canvasGroup.interactable = false;
 		}
 	}
 }
