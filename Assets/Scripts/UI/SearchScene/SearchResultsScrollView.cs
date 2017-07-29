@@ -54,6 +54,7 @@ public class SearchResultsScrollView : LoopVerticalScrollRect {
 					ClearCells();
 					ResetSearchTrackingProperties();
 				} else {
+					m_Controller.SetState(SearchSceneController.SearchSceneState.STATE_LOADING);
 					if (!m_Query.Equals(query)) {
 						ClearCells();
 						ResetSearchTrackingProperties();
@@ -93,6 +94,7 @@ public class SearchResultsScrollView : LoopVerticalScrollRect {
 								m_Controller.SetState(SearchSceneController.SearchSceneState.STATE_NOT_FOUND);
 							}
 						} else {
+							m_Controller.SetState(SearchSceneController.SearchSceneState.STATE_LOADED);
 							UpdateView(programs);
 							
 							// Cache data in case user go back from detail scence
@@ -126,8 +128,6 @@ public class SearchResultsScrollView : LoopVerticalScrollRect {
 	}
 
 	public void UpdateView (List<Program> programs) {
-		m_Controller.SetState(SearchSceneController.SearchSceneState.STATE_LOADED);
-
 		m_Programs.AddRange(programs);
 		m_TotalCount = m_Programs.Count;
 

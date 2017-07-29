@@ -8,7 +8,7 @@ using UniRx;
 public class SearchSceneController : MonoBehaviour {
 	
 	public enum SearchSceneState {
-		STATE_EMPTY, STATE_NOT_FOUND, STATE_LOADED
+		STATE_EMPTY, STATE_NOT_FOUND, STATE_LOADING, STATE_LOADED
 	}
 
 	[SerializeField]
@@ -20,6 +20,9 @@ public class SearchSceneController : MonoBehaviour {
 	[SerializeField]
 	private SearchResultsScrollView m_ScrollView;
 	public SearchResultsScrollView scrollView { get { return m_ScrollView; } set { m_ScrollView = value; } }
+	[SerializeField]
+	private GameObject m_LoadingIndicator;
+	public GameObject loadingIndicator { get { return m_LoadingIndicator; } set { m_LoadingIndicator = value; }}
 
     private YleAPI m_API;
 	private SearchSceneState m_State;
@@ -66,12 +69,20 @@ public class SearchSceneController : MonoBehaviour {
 			case SearchSceneState.STATE_EMPTY:
 				m_EmptySearch.gameObject.SetActive(true);
 				m_NoResultFound.gameObject.SetActive(false);
+				m_LoadingIndicator.SetActive(false);
 				break;
 			case SearchSceneState.STATE_NOT_FOUND:
 				m_NoResultFound.gameObject.SetActive(true);
 				m_EmptySearch.gameObject.SetActive(false);
+				m_LoadingIndicator.SetActive(false);
+				break;
+			case SearchSceneState.STATE_LOADING:
+				m_LoadingIndicator.SetActive(true);
+				m_EmptySearch.gameObject.SetActive(false);
+				m_NoResultFound.gameObject.SetActive(false);
 				break;
 			case SearchSceneState.STATE_LOADED:
+				m_LoadingIndicator.SetActive(false);
 				m_EmptySearch.gameObject.SetActive(false);
 				m_NoResultFound.gameObject.SetActive(false);
 				break;
