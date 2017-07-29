@@ -54,13 +54,14 @@ public class SearchResultsScrollView : LoopVerticalScrollRect {
 					ClearCells();
 					ResetSearchTrackingProperties();
 				} else {
-					m_Controller.SetState(SearchSceneController.SearchSceneState.STATE_LOADING);
 					if (!m_Query.Equals(query)) {
+						m_Controller.SetState(SearchSceneController.SearchSceneState.STATE_LOADING);
 						ClearCells();
 						ResetSearchTrackingProperties();
 						m_Query = query;
+
+						SearchForPrograms();
 					}
-					SearchForPrograms();
 				}
 			})
 			.AddTo(this);
