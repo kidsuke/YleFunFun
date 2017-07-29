@@ -121,6 +121,7 @@ public class SearchResultsScrollView : LoopVerticalScrollRect {
 			m_SearchField.text = SceneTransitionData.query;
 		}
 		if (SceneTransitionData.currentSearchResults != null && SceneTransitionData.currentSearchResults.Count > 0) {
+			m_Controller.SetState(SearchSceneController.SearchSceneState.STATE_LOADED);
 			UpdateView(SceneTransitionData.currentSearchResults);
 		}
 	}
