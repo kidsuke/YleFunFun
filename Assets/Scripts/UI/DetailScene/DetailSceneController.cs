@@ -50,7 +50,8 @@ public class DetailSceneController : MonoBehaviour {
 						}, 
 						error => {
 							loadDefaultErrorImage();
-						});
+						})
+				  .AddTo(this);
 	}
 
 	private void loadDefaultErrorImage() {

@@ -8,7 +8,7 @@ using UniRx;
 public class SearchSceneController : MonoBehaviour {
 	
 	public enum SearchSceneState {
-		STATE_EMPTY, STATE_NOT_FOUND, STATE_LOADING, STATE_LOADED
+		STATE_EMPTY, STATE_NOT_FOUND, STATE_LOADING, STATE_LOADED, STATE_NO_INTERNET
 	}
 
 	[SerializeField]
@@ -17,6 +17,9 @@ public class SearchSceneController : MonoBehaviour {
 	[SerializeField]
 	private RectTransform m_NoResultFound; // The view to show when no result is found
 	public RectTransform noResultFound { get { return m_NoResultFound; } set { m_NoResultFound = value; } }
+	[SerializeField]
+	private RectTransform m_NoInternet; // The view to show when no result is found
+	public RectTransform noInternet { get { return m_NoInternet; } set { m_NoInternet = value; } }
 	[SerializeField]
 	private SearchResultsScrollView m_ScrollView; // The view to show the search results
 	public SearchResultsScrollView scrollView { get { return m_ScrollView; } set { m_ScrollView = value; } }
@@ -40,6 +43,15 @@ public class SearchSceneController : MonoBehaviour {
 	// Get programs from Yle
 	public IObservable<List<Program>> GetPrograms (string query = "", int offset = 0) {
 		return Observable.FromCoroutine<YleResponse>((observer, cancellationToken) => m_API.GetPrograms(observer, cancellationToken, query, offset))
+						 .DoOnError(error => {
+							 int responseCode = 0;
+							 if (int.TryParse(error.Message, out responseCode)) {
+								 if (responseCode == 0) {
+									 // This message is the response code. If the length of it is 0 (no response code returned), it means no network connection
+									 SetState(SearchSceneState.STATE_NO_INTERNET);
+								 }
+							 }
+						 })
 						 .Select(ToPrograms) ;// Map YleResponse to Item (`Select` operator is the same as `Map` operator in Reactive Programming)				 
 	}
 		
@@ -71,18 +83,28 @@ public class SearchSceneController : MonoBehaviour {
 				m_EmptySearch.gameObject.SetActive(true);
 				m_NoResultFound.gameObject.SetActive(false);
 				m_LoadingIndicator.SetActive(false);
+				m_NoInternet.gameObject.SetActive(false);
 				break;
 			case SearchSceneState.STATE_NOT_FOUND:
 				m_NoResultFound.gameObject.SetActive(true);
 				m_EmptySearch.gameObject.SetActive(false);
 				m_LoadingIndicator.SetActive(false);
+				m_NoInternet.gameObject.SetActive(false);
 				break;
 			case SearchSceneState.STATE_LOADING:
 				m_LoadingIndicator.SetActive(true);
 				m_EmptySearch.gameObject.SetActive(false);
 				m_NoResultFound.gameObject.SetActive(false);
+				m_NoInternet.gameObject.SetActive(false);
 				break;
 			case SearchSceneState.STATE_LOADED:
+				m_LoadingIndicator.SetActive(false);
+				m_EmptySearch.gameObject.SetActive(false);
+				m_NoResultFound.gameObject.SetActive(false);
+				m_NoInternet.gameObject.SetActive(false);
+				break;
+			case SearchSceneState.STATE_NO_INTERNET:
+				m_NoInternet.gameObject.SetActive(true);
 				m_LoadingIndicator.SetActive(false);
 				m_EmptySearch.gameObject.SetActive(false);
 				m_NoResultFound.gameObject.SetActive(false);

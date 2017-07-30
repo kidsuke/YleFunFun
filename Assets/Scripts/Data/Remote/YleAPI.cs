@@ -28,7 +28,7 @@ public class YleAPI {
 			yield return webRequest.Send();
 
 			if (webRequest.isHttpError || webRequest.isNetworkError) {
-				observer.OnError(new System.Exception(webRequest.error));
+				observer.OnError(new System.Exception(webRequest.responseCode.ToString()));
 			} else {
 				YleResponse response = JsonUtility.FromJson<YleResponse>(webRequest.downloadHandler.text);
 				if (response != null) {
