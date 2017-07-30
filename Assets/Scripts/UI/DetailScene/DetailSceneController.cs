@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UniRx;
 
 public class DetailSceneController : MonoBehaviour {
+	
 	[SerializeField]
 	private Image m_CoverImage;
 	public Image coverImage { get { return m_CoverImage; } set { m_CoverImage = value; } }

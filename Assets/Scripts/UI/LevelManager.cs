@@ -4,7 +4,17 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour {
-	
+
+	[SerializeField]
+	private float m_AutoLoadDuration;
+	public float autoLoadDuration { get { return m_AutoLoadDuration; } set { m_AutoLoadDuration = value; }}
+
+	void Start () {
+		if (m_AutoLoadDuration != 0) {
+			Invoke("LoadNextLevel", m_AutoLoadDuration);
+		}
+	}
+
 	public void LoadLevel(string name){
 		Debug.Log ("New Level load: " + name);		
         SceneManager.LoadScene(name);

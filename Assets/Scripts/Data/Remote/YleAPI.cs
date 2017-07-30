@@ -6,6 +6,7 @@ using UnityEngine.Networking;
 using UniRx;
 
 public class YleAPI {
+	
 	public static readonly string BASE_URL = "https://external.api.yle.fi";
 	public static readonly string BASE_IMAGE_URL = "http://images.cdn.yle.fi/image/upload";
 	public static readonly string VERSION = "v1";
