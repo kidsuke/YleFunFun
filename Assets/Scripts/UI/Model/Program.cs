@@ -6,4 +6,6 @@ public class Program {
 	public string imageId;
     public string title;
 	public string description;
+	public string type;
+	public string duration;
 }

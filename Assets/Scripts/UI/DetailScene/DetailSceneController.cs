@@ -14,7 +14,13 @@ public class DetailSceneController : MonoBehaviour {
 	public Sprite defaultSprite { get { return m_DefaultSprite; } set { m_DefaultSprite = value; } }
 	[SerializeField]
 	private Text m_Title;
-	public Text tile { get { return m_Title; } set { m_Title = value; } }
+	public Text title { get { return m_Title; } set { m_Title = value; } }
+	[SerializeField]
+	private Text m_Duration;
+	public Text duration { get { return m_Duration; } set { m_Duration = value; } }
+	[SerializeField]
+	private Text m_Type;
+	public Text type { get { return m_Type; } set { m_Type = value; } }
 	[SerializeField]
 	private Text m_Description;
 	public Text description { get { return m_Description; } set { m_Description = value; } }
@@ -32,6 +38,8 @@ public class DetailSceneController : MonoBehaviour {
 		GetCoverImage();
 		m_Title.text = m_Program.title;
 		m_Description.text = m_Program.description;
+		m_Duration.text = m_Program.duration;
+		m_Type.text = m_Program.type;
 	}
 
 	// Get a cover image from Yle

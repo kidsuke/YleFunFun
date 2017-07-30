@@ -28,6 +28,7 @@ public class YleResponse {
 		public string[] countryOfOrigin;
 		public string id;
 		public string typeCreative;
+		public string duration;
 		public Image image;
 	};
 

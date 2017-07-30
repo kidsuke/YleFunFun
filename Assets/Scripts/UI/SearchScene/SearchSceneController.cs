@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -36,7 +37,6 @@ public class SearchSceneController : MonoBehaviour {
 	}
 
 	void Start () {
-		m_State = SearchSceneState.STATE_EMPTY;
 		SetupView();
 	}
 
@@ -63,11 +63,44 @@ public class SearchSceneController : MonoBehaviour {
 
 			program.id = response.data[index].id;
 			program.imageId = response.data[index].image.id;
-			program.title = (response.data[index].title.fi != null) ? response.data[index].title.fi : "No finnish title found";
+			program.title = (response.data[index].title.fi != null) ? response.data[index].title.fi : response.data[index].title.sv;
+			program.title = (program.title != null) ? program.title : "No title found";
 			program.description = (response.data[index].description.fi !=null) ? response.data[index].description.fi : "No description found";
+			program.type = (response.data[index].type !=null) ? response.data[index].type : "No type found";
+			program.duration = ParseDurationFromResponse(response.data[index].duration);
+
 			programs.Add(program);
 		}
 		return programs;
+	}
+
+	private string ParseDurationFromResponse (string duration) {
+		if (duration == null) {
+			return "No duration found";
+		}
+
+		try {
+			// If duration exists, it will be in the format "PT*H*M*S", where * is the amount of minutes and seconds
+			StringBuilder builder = new StringBuilder();
+			string[] seperator = new string[] {"PT", "H", "M", "S"};
+			string[] durationAsArray = duration.Split(seperator, StringSplitOptions.RemoveEmptyEntries);
+
+			if (durationAsArray.Length == 3) {
+				builder.Append(durationAsArray[0]).Append(" ").Append("H").Append(" ");
+				builder.Append(durationAsArray[1]).Append(" ").Append("MIN").Append(" ");
+				builder.Append(durationAsArray[2]).Append(" ").Append("SEC");
+			} else if (durationAsArray.Length == 2) {
+				builder.Append(durationAsArray[0]).Append(" ").Append("MIN").Append(" ");
+				builder.Append(durationAsArray[1]).Append(" ").Append("SEC");
+			} else if (durationAsArray.Length == 1) {
+				builder.Append(durationAsArray[0]).Append(" ").Append("SEC");
+			}
+
+			return builder.ToString();
+		} catch (IndexOutOfRangeException e) {
+			Debug.LogError(this.GetType().Name + ": " + e.Message);
+			return "No duration found";
+		}
 	}
 
 	public void SetState (SearchSceneState state) {
