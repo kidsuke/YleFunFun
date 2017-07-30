@@ -6,12 +6,12 @@ PlayerSettings:
   serializedVersion: 12
   productGUID: 02ae86c79b1749d4abf83a525ffef077
   AndroidProfiler: 0
-  defaultScreenOrientation: 4
+  defaultScreenOrientation: 0
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: DefaultCompany
-  productName: New Unity Project
+  companyName: longvu
+  productName: YleFunFun
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
@@ -138,9 +138,10 @@ PlayerSettings:
       depthFormat: 1
   protectGraphicsMemory: 0
   useHDRDisplay: 0
-  targetPixelDensity: 0
-  resolutionScalingMode: 0
-  applicationIdentifier: {}
+  targetPixelDensity: 200
+  resolutionScalingMode: 1
+  applicationIdentifier:
+    Android: com.longvu.YleFunFun
   buildNumber: {}
   AndroidBundleVersionCode: 1
   AndroidMinSdkVersion: 16
