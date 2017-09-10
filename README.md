@@ -12,7 +12,7 @@ YleFunFun is an application made with Unity using [**Yle API**][1] to search for
 
 > **Note:**
 > - This is an *non-profit* and *non-commercial* project since the main purpose is for practicing with Unity. Therefore, the code is open for use which you can fork and modify to fit your needs. 
-> - Although it has already been a pair of **AppId** and **AppKey** in the application, you, however, should ask them for yourself on **Yle API website**. There will be also a secret key if you need more advanced usage.
+> - In order to use the application, you should obtain your own API key and id from **Yle API website**. There will be also a secret key if you need more advanced usage.
 > - Remember to spend some time to read [**Yle API license**][3].
 > - Enjoy !!! :smiley:	
 

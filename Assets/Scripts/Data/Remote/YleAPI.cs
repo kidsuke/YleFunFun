@@ -11,8 +11,8 @@ public class YleAPI {
 	public static readonly string BASE_IMAGE_URL = "http://images.cdn.yle.fi/image/upload";
 	public static readonly string VERSION = "v1";
 	private UrlBuilder m_Builder = new UrlBuilder(BASE_URL);
-	private string m_AppId = "d14e023d";
-	private string m_AppKey = "96da296c91609b7835e8bb861a4ca6fc";
+	private string m_AppId = "";
+	private string m_AppKey = "";
 
 	//GET Request
 	public IEnumerator GetPrograms(IObserver<YleResponse> observer, CancellationToken cancellationToken, string query, int offset = 0, int limit = 10) {
